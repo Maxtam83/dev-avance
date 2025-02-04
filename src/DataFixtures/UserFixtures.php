@@ -14,6 +14,7 @@ class UserFixtures extends Fixture
 		$user = new User();
 		$user->setLogin('admin');
 		$user->setPassword('password123'); // Mot de passe en clair
+        $user->setRoles(['ROLE_ADMIN']);
 
 		$manager->persist($user);
 
@@ -22,7 +23,7 @@ class UserFixtures extends Fixture
 			$user = new User();
 			$user->setLogin('user' . $i);
 			$user->setPassword('userpass' . $i); // Mot de passe en clair
-
+            $user->setRoles(['ROLE_USER']);
 			$manager->persist($user);
 		}
 
