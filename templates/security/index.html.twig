@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Connexion</h1>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form method="post">
+        <label for="login">Login:</label>
+        <input type="text" name="_username" id="login" value="{{ last_username }}" required autofocus>
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" name="_password" id="password" required>
+
+        <button type="submit">Se connecter</button>
+    </form>
+{% endblock %}
