@@ -1,4 +1,4 @@
-Make by :
+Crée par :
 
 - Léo GINER 
 - Maxime TAMARIN
