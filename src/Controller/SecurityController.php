@@ -8,9 +8,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class SecurityController extends AbstractController
 {
+    private HttpClientInterface $client;
+
+    public function __construct(HttpClientInterface $client)
+    {
+        $this->client = $client;
+    }
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils                       $authenticationUtils,
                           UserRepository                            $userRepository,
@@ -56,6 +64,26 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('base.html.twig');
+        try {
+            // consommer une api pour recupérer une email
+            $response = $this->client->request('GET', 'http://127.0.0.1:8000/api/users/4', [
+                'headers' => [
+                    'accept' => 'application/ld+json'
+                ]
+            ]);
+
+            // Convertir la réponse JSON en tableau PHP
+            $data = $response->toArray();
+        } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
+            $data = [];
+        }
+
+        // Récupérer seulement l'email
+        $email = $data['email'] ?? 'Email not found';
+
+        return $this->render('base.html.twig', [
+            'user' => $this->getUser(),
+            'email' => $email
+        ]);
     }
 }
