@@ -1,14 +1,13 @@
 security:
-    # Configuration du hachage des mots de passe
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
-    # Configuration des providers (source des utilisateurs)
     providers:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: login
+                property: username
+
 
     firewalls:
         dev:
@@ -18,32 +17,14 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-
             form_login:
                 login_path: app_login
                 check_path: app_login
-                default_target_path: app_home # Redirection après connexion
-
+                default_target_path: /home
             logout:
                 path: app_logout
-                target: app_login # Redirection après déconnexion
+                target: app_login
 
-            # Permet de se souvenir des utilisateurs (facultatif)
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800 # 7 jours
-                path: /
-
-    # Contrôle d'accès selon les rôles
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER }
-
-when@test:
-    security:
-        password_hashers:
-            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-                algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+        - { path: ^/dashboard, roles: ROLE_USER }
