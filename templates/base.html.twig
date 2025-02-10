@@ -16,7 +16,8 @@
         {% block body %}
             <h1>Bonjour {{ user.username }}</h1>
             <p>Vous êtes connecté en tant que {{ user.username }} </p>
-            <p>L'email récupéré est {{ email }}</p>
+            <p> {{ citation }}</p>
+            <p> {{ auteur }}</p>
             <p><a href="{{ path('app_logout') }}">Déconnexion</a></p>
         {% endblock %}
 

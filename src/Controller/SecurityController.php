@@ -65,25 +65,27 @@ class SecurityController extends AbstractController
         }
 
         try {
-            // consommer une api pour recupérer une email
-//            $response = $this->client->request('GET', 'http://127.0.0.1:8000/api/users/4', [
-//                'headers' => [
-//                    'accept' => 'application/ld+json'
-//                ]
-//            ]);
-//
-//            // Convertir la réponse JSON en tableau PHP
-//            $data = $response->toArray();
-        } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
-            $data = [];
+            $response = $this->client->request('GET', "http://127.0.0.1:8000/api/citations?page=1", [
+                'headers' => [
+                    'accept' => 'application/ld+json',
+                ],
+            ]);
+
+            $data = $response->toArray();
+        } catch (\Exception $e) {
+            $data = ['error' => $e->getMessage()];
         }
 
-        // Récupérer seulement l'email
-        $email = $data['email'] ?? 'Email not found';
+        // Vérifier si on a des citations
+        if (isset($data['member']) && is_array($data['member']) && count($data['member']) > 0) {
+            // Sélectionner une citation au hasard
+            $citationAleatoire = $data['member'][array_rand($data['member'])];
+        }
 
         return $this->render('base.html.twig', [
             'user' => $this->getUser(),
-            'email' => $email
+            'citation' => $citationAleatoire['citation'] ?? 'Aucune citation disponible',
+            'auteur' => $citationAleatoire['auteur'] ?? 'Inconnu'
         ]);
     }
 }
