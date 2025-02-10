@@ -55,6 +55,30 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
+    public function getNewCitation(): array
+    {
+        try {
+            $response = $this->client->request('GET', "http://127.0.0.1:8000/api/citations?page=1", [
+                'headers' => [
+                    'accept' => 'application/ld+json',
+                ],
+            ]);
+
+            $data = $response->toArray();
+        } catch (\Exception $e) {
+            $data = ['error' => $e->getMessage()];
+        }
+
+        // Vérifier si on a des citations
+        if (isset($data['member']) && is_array($data['member']) && count($data['member']) > 0) {
+            // Sélectionner une citation au hasard
+            $citationAleatoire = $data['member'][array_rand($data['member'])];
+        }
+
+        return $citationAleatoire;
+
+    }
+
     #[Route(path: '/home', name: 'app_home')]
     public function home(): Response
     {
@@ -85,7 +109,8 @@ class SecurityController extends AbstractController
         return $this->render('base.html.twig', [
             'user' => $this->getUser(),
             'citation' => $citationAleatoire['citation'] ?? 'Aucune citation disponible',
-            'auteur' => $citationAleatoire['auteur'] ?? 'Inconnu'
-        ]);
+            'auteur' => $citationAleatoire['auteur'] ?? 'Inconnu',
+            'existe' => (bool)($citationAleatoire['existe'] ?? false)
+            ]);
     }
 }

@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    {% block stylesheets %}
+    {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-            <h1>Bonjour {{ user.username }}</h1>
-            <p>Vous êtes connecté en tant que {{ user.username }} </p>
-            <p> {{ citation }}</p>
-            <p> {{ auteur }}</p>
-            <p><a href="{{ path('app_logout') }}">Déconnexion</a></p>
-        {% endblock %}
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <h1>Bonjour {{ user.username }}</h1>
+    <p>Vous êtes connecté en tant que {{ user.username }} </p>
+    <p> {{ citation }}</p>
+    <p> {{ auteur }}</p>
+    <button onclick="checkAnswer(true)">Vrai</button>
+    <button onclick="checkAnswer(false)">Faux</button>
+    <p>Compteur de bonnes réponses: <span id="counter">0</span></p>
 
-    </body>
+    <script>
+        function checkAnswer(answer) {
+            var correctAnswer = {{ existe ? 'true' : 'false' }};
+            if (answer === correctAnswer) {
+                incrementCounter();
+            }
+        }
+
+        function incrementCounter() {
+            var counterElement = document.getElementById('counter');
+            var currentCount = parseInt(counterElement.innerText);
+            counterElement.innerText = currentCount + 1;
+        }
+    </script>
+
+    <p><a href="{{ path('app_logout') }}">Déconnexion</a></p>
+{% endblock %}
+
+</body>
 </html>
