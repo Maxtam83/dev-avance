@@ -1,4 +1,4 @@
-# Nom du Projet
+# CitaQuizz
 
 ## Description
 Ce projet est une application web construite en utilisant PHP et JavaScript. Il inclut l'authentification des utilisateurs, l'inscription et d'autres fonctionnalités. Le projet est stylisé avec du CSS pour fournir une interface moderne et visuellement attrayante.
