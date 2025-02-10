@@ -22,6 +22,7 @@ Ce projet est une application web construite en utilisant PHP et JavaScript. Il 
     git clone https://github.com/MARIE-Clement-2225058b/api.git
     cd api
     composer install
+    php bin/console doctrine:database:create
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate
     php bin/console doctrine:fixtures:load
@@ -59,4 +60,4 @@ Ce projet est une application web construite en utilisant PHP et JavaScript. Il 
     ```
 
 ## Utilisation
-Ouvrez votre navigateur web et naviguez vers `http://localhost:8001/login` pour accéder à l'application.
+Ouvrez votre navigateur web et naviguez vers `http://localhost:8001/login` pour accéder à l'application avec MDP : admin PASSWORD : admin. La redirection d'URL fonctionne également.
