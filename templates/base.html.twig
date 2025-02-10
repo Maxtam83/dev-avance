@@ -4,40 +4,53 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-    {% block stylesheets %}
-    {% endblock %}
-
-    {% block javascripts %}
-        {% block importmap %}{{ importmap('app') }}{% endblock %}
-    {% endblock %}
+    {% block stylesheets %} {% endblock %}
+    {% block javascripts %} {% block importmap %}{{ importmap('app') }}{% endblock %} {% endblock %}
 </head>
 <body>
 {% block body %}
     <h1>Bonjour {{ user.username }}</h1>
-    <p>Vous êtes connecté en tant que {{ user.username }} </p>
-    <p> {{ citation }}</p>
-    <p> {{ auteur }}</p>
+    <h2>CITATION DU JOUR</h2>
+    <p id="citation-text"><i>"{{ citation }}"</i></p>
+    <p id="citation-author"><br><br>{{ auteur }}</p>
+
     <button onclick="checkAnswer(true)">Vrai</button>
     <button onclick="checkAnswer(false)">Faux</button>
+
     <p>Compteur de bonnes réponses: <span id="counter">0</span></p>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Récupérer le score depuis localStorage
+            var score = localStorage.getItem("score") || 0;
+            document.getElementById("counter").innerText = score;
+        });
+
         function checkAnswer(answer) {
             var correctAnswer = {{ existe ? 'true' : 'false' }};
+
             if (answer === correctAnswer) {
                 incrementCounter();
             }
+
+            // Rafraîchir la page pour charger une nouvelle citation
+            setTimeout(() => {
+                location.reload();
+            }, 500); // Attendre 500ms pour que l'utilisateur voie le changement
         }
 
         function incrementCounter() {
             var counterElement = document.getElementById('counter');
             var currentCount = parseInt(counterElement.innerText);
-            counterElement.innerText = currentCount + 1;
+            var newCount = currentCount + 1;
+            counterElement.innerText = newCount;
+
+            // Stocker le score mis à jour dans localStorage
+            localStorage.setItem("score", newCount);
         }
     </script>
 
     <p><a href="{{ path('app_logout') }}">Déconnexion</a></p>
 {% endblock %}
-
 </body>
 </html>
