@@ -59,4 +59,4 @@ Ce projet est une application web construite en utilisant PHP et JavaScript. Il 
     ```
 
 ## Utilisation
-Ouvrez votre navigateur web et naviguez vers `http://localhost:8001/login` pour accéder à l'application.
+Ouvrez votre navigateur web et naviguez vers `http://localhost:8001/login` pour accéder à l'application. La redirection d'URL fonctionne également.
