@@ -66,14 +66,14 @@ class SecurityController extends AbstractController
 
         try {
             // consommer une api pour recupérer une email
-            $response = $this->client->request('GET', 'http://127.0.0.1:8000/api/users/4', [
-                'headers' => [
-                    'accept' => 'application/ld+json'
-                ]
-            ]);
-
-            // Convertir la réponse JSON en tableau PHP
-            $data = $response->toArray();
+//            $response = $this->client->request('GET', 'http://127.0.0.1:8000/api/users/4', [
+//                'headers' => [
+//                    'accept' => 'application/ld+json'
+//                ]
+//            ]);
+//
+//            // Convertir la réponse JSON en tableau PHP
+//            $data = $response->toArray();
         } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
             $data = [];
         }
