@@ -44,16 +44,17 @@ Ce projet est une application web construite en utilisant PHP et JavaScript. Il 
     php bin/console cache:clear
     ```
 
-5. **Lancer l'application :**
-    ```bash
-    symfony server:start
-    ```
 
-6. **Charger les fixtures pour la base de données :**
+5. **Charger les fixtures pour la base de données :**
     ```bash
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate
     php bin/console doctrine:fixtures:load
+    ```
+
+6. **Lancer l'application :**
+    ```bash
+    symfony server:start
     ```
 
 ## Utilisation
