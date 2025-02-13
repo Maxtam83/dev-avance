@@ -111,6 +111,6 @@ class SecurityController extends AbstractController
             'citation' => $citationAleatoire['citation'] ?? 'Aucune citation disponible',
             'auteur' => $citationAleatoire['auteur'] ?? 'Inconnu',
             'existe' => (bool)($citationAleatoire['existe'] ?? false)
-            ]);
+        ]);
     }
 }
