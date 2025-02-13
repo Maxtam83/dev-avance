@@ -18,6 +18,8 @@ Ce projet est une application web construite en utilisant PHP et JavaScript. Il 
 ### Étapes
 
 1. **Cloner le dépôt de l'API et le lancer :**
+   
+   Dépôt api : [https://github.com/MARIE-Clement-2225058b/api](https://github.com/MARIE-Clement-2225058b/api)
     ```bash
     git clone https://github.com/MARIE-Clement-2225058b/api.git
     cd api
@@ -60,4 +62,4 @@ Ce projet est une application web construite en utilisant PHP et JavaScript. Il 
     ```
 
 ## Utilisation
-Ouvrez votre navigateur web et naviguez vers `http://localhost:8001/login` pour accéder à l'application avec MDP : admin PASSWORD : admin. La redirection d'URL fonctionne également.
+Ouvrez votre navigateur web et naviguez vers `http://localhost:8001` pour accéder à l'application avec MDP : admin PASSWORD : admin. La redirection d'URL fonctionne également.
