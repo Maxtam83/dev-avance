@@ -18,6 +18,8 @@ Ce projet est une application web construite en utilisant PHP et JavaScript. Il 
 ### Étapes
 
 1. **Cloner le dépôt de l'API et le lancer :**
+   
+   Dépôt api : [https://github.com/MARIE-Clement-2225058b/api](https://github.com/MARIE-Clement-2225058b/api)
     ```bash
     git clone https://github.com/MARIE-Clement-2225058b/api.git
     cd api
