@@ -62,4 +62,4 @@ Ce projet est une application web construite en utilisant PHP et JavaScript. Il 
     ```
 
 ## Utilisation
-Ouvrez votre navigateur web et naviguez vers `http://localhost:8001/login` pour accéder à l'application avec MDP : admin PASSWORD : admin. La redirection d'URL fonctionne également.
+Ouvrez votre navigateur web et naviguez vers `http://localhost:8001` pour accéder à l'application avec MDP : admin PASSWORD : admin. La redirection d'URL fonctionne également.
