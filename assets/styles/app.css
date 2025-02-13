@@ -157,7 +157,7 @@ a:hover {
 .form-container button {
     background: #ff6b6b;
     color: white;
-    padding: 15px; /* Increased padding for more space */
+    padding: 20px; /* Increased padding for more space */
     border: none;
     border-radius: 5px;
     cursor: pointer;
